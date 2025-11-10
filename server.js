@@ -7,6 +7,12 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
+// Route principale
+app.get("/", (req, res) => {
+  res.send("Backend AutoDigital attivo! Usa /generate o /publish.");
+});
+
+// Route per generare contenuti OpenAI
 app.post('/generate', async (req, res) => {
   const { prompt } = req.body;
   try {
@@ -29,6 +35,7 @@ app.post('/generate', async (req, res) => {
   }
 });
 
+// Route per creare prodotto su Gumroad
 app.post('/publish', async (req, res) => {
   const { name, description, price } = req.body;
   try {
